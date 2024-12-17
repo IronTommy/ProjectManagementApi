@@ -150,4 +150,4 @@ services:
 ## Контакты
 Для вопросов и предложений:  
 Email: `timullka@gmail.com`  
-GitHub: [https://github.com](https://github.com/IronTommy)
+GitHub: [https://github.com/IronTommy](https://github.com/IronTommy)
