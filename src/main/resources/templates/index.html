@@ -1,0 +1,19 @@
+<!-- src/main/resources/templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Project Management</title>
+</head>
+<body>
+<h1>Welcome to Project Management</h1>
+<div>
+    <h2>All Projects:</h2>
+    <ul>
+        <th:block th:each="project : ${projects}">
+            <li th:text="${project.name}"></li>
+        </th:block>
+    </ul>
+</div>
+</body>
+</html>

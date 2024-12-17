@@ -1,0 +1,84 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="create user table" author="Timur.Shaydullin">
+        <createTable tableName="user">
+            <column name="id" type="uuid">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="is_deleted" type="boolean" defaultValue="false">
+            </column>
+            <column name="first_name" type="varchar(255)"/>
+            <column name="last_name" type="varchar(255)"/>
+            <column name="email" type="varchar(255)"/>
+            <column name="password" type="varchar(255)"/>
+            <column name="reg_date" type="timestamptz"/>
+            <column name="created_date" type="timestamptz"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create account table" author="Timur.Shaydullin">
+        <createTable tableName="account">
+            <column name="id" type="uuid">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="phone" type="varchar(255)"/>
+            <column name="status_code" type="varchar(255)"/>
+            <column name="last_online_time" type="timestamptz"/>
+            <column name="is_online" type="boolean"/>
+            <column name="is_blocked" type="boolean"/>
+            <column name="deletion_timestamp" type="timestamptz"/>
+            <column name="last_modified_date" type="timestamptz"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="add_indexes_to_account_table" author="Timur_Shaidullin">
+        <createIndex tableName="account" indexName="idx_last_online_time">
+            <column name="last_online_time"/>
+        </createIndex>
+
+        <createIndex tableName="account" indexName="idx_is_online">
+            <column name="is_online"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet id="create role table" author="Timur.Shaydullin">
+        <createTable tableName="role">
+            <column name="id" type="uuid">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="value" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create user-role table" author="Timur.Shaydullin">
+        <createTable tableName="user_role">
+            <column name="user_id" type="uuid">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="role_id" type="uuid">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+
+
+    <changeSet id="insert roles" author="Timur.Shaydullin">
+        <loadData
+                file="db/changelog/data/roles.csv"
+                separator=";"
+                tableName="role">
+            <column name="id" type="uuid"/>
+            <column name="value" type="varchar(255)"/>
+        </loadData>
+    </changeSet>
+
+
+
+</databaseChangeLog>
